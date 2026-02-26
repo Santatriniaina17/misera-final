@@ -1,0 +1,5 @@
+python -m venv env
+env\Scripts\activate
+django-admin startproject nomprojet
+python manage.py migrate
+python manage.py run server
