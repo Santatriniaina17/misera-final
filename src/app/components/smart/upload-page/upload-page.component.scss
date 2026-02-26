@@ -1,0 +1,38 @@
+.main-container {
+  background: linear-gradient(221deg, #051937, #128beb);
+  background-size: 120% 120%;
+  animation: gradient-animation 3s ease infinite;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.upload-container {
+  display: flex;
+  border-radius: 15px;
+  background-color: #ffffff4c;
+  width: 80%;
+  height: 600px;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

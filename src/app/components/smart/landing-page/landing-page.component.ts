@@ -7,7 +7,7 @@ import { AboutModalComponent } from '../about-modal/about-modal.component';
 
 @Component({
   selector: 'app-landing-page',
-  imports: [MatButtonModule, MatIconModule, AboutModalComponent],
+  imports: [MatButtonModule, MatIconModule],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
 })
