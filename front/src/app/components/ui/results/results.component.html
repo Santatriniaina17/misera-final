@@ -1,0 +1,124 @@
+<div class="results-container">
+  @if (result) {
+    <!-- Score & Stats header -->
+    <div class="stats-header">
+      <div class="score-section">
+        <app-score-badge
+          [score]="result.score_label"
+          [details]="result.score_details"
+        ></app-score-badge>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-label">Bénéfice total</span>
+          <span
+            class="kpi-value"
+            [class.positive]="result.stats.total_benefice >= 0"
+            [class.negative]="result.stats.total_benefice < 0"
+          >
+            {{ result.stats.total_benefice }} Ar
+          </span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Moyenne mensuelle</span>
+          <span class="kpi-value">{{ result.stats.avg_mensuel }} Ar</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Min. bénéfice</span>
+          <span class="kpi-value negative"
+            >{{ result.stats.min_benefice }} Ar</span
+          >
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Max. bénéfice</span>
+          <span class="kpi-value positive"
+            >{{ result.stats.max_benefice }} Ar</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Main chart -->
+    <mat-card class="chart-card">
+      <mat-card-header>
+        <mat-card-title>📈 Historique & Prédictions de Bénéfice</mat-card-title>
+        <mat-card-subtitle
+          >Courbe réelle + projections 6 mois</mat-card-subtitle
+        >
+      </mat-card-header>
+      <mat-card-content>
+        <apx-chart
+          [series]="mainChartSeries"
+          [chart]="mainChartOptions.chart"
+          [xaxis]="mainChartOptions.xaxis"
+          [yaxis]="mainChartOptions.yaxis"
+          [stroke]="mainChartOptions.stroke"
+          [fill]="mainChartOptions.fill"
+          [markers]="mainChartOptions.markers"
+          [annotations]="mainChartOptions.annotations"
+          [tooltip]="mainChartOptions.tooltip"
+          [theme]="mainChartOptions.theme"
+          [grid]="mainChartOptions.grid"
+        >
+        </apx-chart>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Service-specific revenue/depense chart -->
+    <mat-card class="chart-card">
+      @if (result.type === "service") {
+        <mat-card-header>
+          <mat-card-title>💰 Revenus vs Dépenses</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <apx-chart
+            [series]="revDepSeries"
+            [chart]="barChartOptions.chart"
+            [xaxis]="barChartOptions.xaxis"
+            [plotOptions]="barChartOptions.plotOptions"
+            [dataLabels]="barChartOptions.dataLabels"
+            [colors]="barChartOptions.colors"
+            [theme]="mainChartOptions.theme"
+          >
+          </apx-chart>
+        </mat-card-content>
+      }
+    </mat-card>
+
+    <!-- Product CA/Benefice chart -->
+    <mat-card class="chart-card">
+      @if (result.type === "produit") {
+        <mat-card-header>
+          <mat-card-title>🛒 CA vs Coût vs Bénéfice mensuel</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <apx-chart
+            [series]="productSeries"
+            [chart]="barChartOptions.chart"
+            [xaxis]="barChartOptions.xaxis"
+            [plotOptions]="barChartOptions.plotOptions"
+            [dataLabels]="barChartOptions.dataLabels"
+            [colors]="['#667eea', '#ff6b6b', '#1dd1a1']"
+            [theme]="mainChartOptions.theme"
+          >
+          </apx-chart>
+        </mat-card-content>
+      }
+    </mat-card>
+
+    <!-- Model comparison -->
+    <app-model-scores
+      [allScores]="result.all_model_scores"
+      [bestModel]="result.best_model"
+      [bestScore]="result.best_model_score"
+    >
+    </app-model-scores>
+
+    <!-- Product analysis -->
+    <app-product-analysis
+      *ngIf="result.type === 'produit' && result.product_analysis"
+      [products]="result.product_analysis!"
+    >
+    </app-product-analysis>
+  }
+</div>

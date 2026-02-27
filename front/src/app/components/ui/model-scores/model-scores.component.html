@@ -1,0 +1,33 @@
+<mat-card class="model-card">
+  <mat-card-header>
+    <mat-card-title> 🧠 Comparaison des Modèles ML </mat-card-title>
+    <mat-card-subtitle
+      >GridSearch + Validation croisée temporelle</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <div class="best-model-info">
+      <span class="best-label">🏆 Meilleur modèle :</span>
+      <mat-chip highlighted color="accent">{{
+        formatModelName(bestModel)
+      }}</mat-chip>
+      <span class="best-score">R² = {{ bestScore | number: "1.3-3" }}</span>
+    </div>
+    <div class="models-list">
+      @for (entry of scores; track entry.name) {
+        <div class="model-row" [class.is-best]="entry.name === bestModel">
+          <span class="model-name">{{ formatModelName(entry.name) }}</span>
+          <mat-progress-bar
+            mode="determinate"
+            [value]="getBarValue(entry.score)"
+            [color]="entry.name === bestModel ? 'accent' : 'primary'"
+          >
+          </mat-progress-bar>
+          <span class="model-score">
+            {{ entry.score !== null ? (entry.score | number: "1.3-3") : "N/A" }}
+          </span>
+        </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,5 +1,142 @@
-<div class="main-container">
+<!-- <div class="main-container">
   <div class="upload-container">
     <input type="file" matInput />
   </div>
+</div>
+ -->
+<div class="upload-wrapper">
+  <!-- Header -->
+  <div class="app-header">
+    <div class="header-content">
+      <h1 class="app-title">
+        <span class="title-icon">📊</span>
+        ProfitPredictor AI
+      </h1>
+      <p class="app-subtitle">
+        Prédisez vos bénéfices futurs grâce au Machine Learning
+      </p>
+    </div>
+  </div>
+
+  <!-- Upload card -->
+  <mat-card class="upload-card">
+    @if (!result()) {
+      <mat-card-content>
+        <!-- Step 1: Type selection -->
+        <div class="step">
+          <div class="step-header">
+            <span class="step-number">1</span>
+            <span class="step-label">Choisissez votre activité</span>
+          </div>
+          <div class="type-selection">
+            <div
+              class="type-card"
+              [class.selected]="selectedType() === 'produit'"
+              (click)="selectedType.set('produit')"
+            >
+              <span class="type-icon">🏪</span>
+              <span class="type-name">Vendeur de Produits</span>
+              <span class="type-desc"
+                >date · désignation · prix achat · prix vente</span
+              >
+            </div>
+            <div
+              class="type-card"
+              [class.selected]="selectedType() === 'service'"
+              (click)="selectedType.set('service')"
+            >
+              <span class="type-icon">🛠️</span>
+              <span class="type-name">Prestataire de Services</span>
+              <span class="type-desc">date · dépense · revenu</span>
+            </div>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <!-- Step 2: CSV upload -->
+        <div class="step" [class.disabled]="!selectedType()">
+          <div class="step-header">
+            <span class="step-number">2</span>
+            <span class="step-label">Importez votre fichier CSV</span>
+          </div>
+
+          <div class="csv-format-hint" *ngIf="selectedType()">
+            <strong>Format attendu :</strong>
+            <code *ngIf="selectedType() === 'produit'"
+              >date, designation, prix_achat, prix_vente</code
+            >
+            <code *ngIf="selectedType() === 'service'"
+              >date, depense, revenu</code
+            >
+          </div>
+
+          <div
+            class="drop-zone"
+            [class.has-file]="selectedFile()"
+            [class.dragging]="isDragging()"
+            (click)="fileInput.click()"
+            (dragover)="onDragOver($event)"
+            (dragleave)="isDragging.set(false)"
+            (drop)="onDrop($event)"
+          >
+            <input
+              #fileInput
+              type="file"
+              accept=".csv"
+              hidden
+              (change)="onFileSelected($event)"
+            />
+
+            <div class="drop-content">
+              <mat-icon class="drop-icon">{{
+                selectedFile() ? "check_circle" : "upload_file"
+              }}</mat-icon>
+              <p class="drop-text">
+                {{
+                  selectedFile()
+                    ? selectedFile()!.name
+                    : "Glissez votre CSV ici ou cliquez pour sélectionner"
+                }}
+              </p>
+              <span class="drop-hint" *ngIf="!selectedFile()"
+                >Formats: .csv · Max 10MB</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Action button -->
+        <div class="action-section">
+          <button
+            mat-raised-button
+            color="primary"
+            class="predict-btn"
+            [disabled]="!canSubmit() || isLoading()"
+            (click)="submit()"
+          >
+            <mat-spinner *ngIf="isLoading()" diameter="20"></mat-spinner>
+            <mat-icon *ngIf="!isLoading()">auto_awesome</mat-icon>
+            {{
+              isLoading() ? "Analyse en cours..." : "Lancer la prédiction IA"
+            }}
+          </button>
+        </div>
+      </mat-card-content>
+    }
+  </mat-card>
+
+  <!-- Results -->
+  <div class="results-section" *ngIf="result()">
+    <div class="results-actions">
+      <button mat-stroked-button (click)="reset()">
+        <mat-icon>refresh</mat-icon> Nouvelle analyse
+      </button>
+    </div>
+    <app-results [result]="result()!"></app-results>
+  </div>
+
+  <p class="footer-note">
+    Aucune donnée n'est stockée — traitement 100% en mémoire
+  </p>
 </div>

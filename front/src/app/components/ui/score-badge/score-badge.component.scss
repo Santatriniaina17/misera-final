@@ -1,0 +1,154 @@
+.score-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 24px;
+  border-radius: 16px;
+  font-weight: 700;
+}
+.score-faible {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+}
+.score-moyen {
+  background: linear-gradient(135deg, #ffd32a, #f7b731);
+  color: #333;
+}
+.score-élevé {
+  background: linear-gradient(135deg, #00d2d3, #1dd1a1);
+  color: white;
+}
+.score-icon {
+  font-size: 2rem;
+}
+.score-text-block {
+  display: flex;
+  flex-direction: column;
+}
+.score-main {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+.score-sub {
+  font-size: 0.75rem;
+  opacity: 0.85;
+  font-weight: 400;
+}
+
+.score-context {
+  background: white;
+  border-radius: 14px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.context-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.ctx-label {
+  font-size: 0.85rem;
+  color: #666;
+}
+.ctx-value {
+  font-weight: 700;
+  font-size: 1rem;
+}
+.positive {
+  color: #1dd1a1;
+}
+.negative {
+  color: #ff6b6b;
+}
+.neutral {
+  color: #f7b731;
+}
+
+/* Percentile bar */
+.percentile-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+.pct-label {
+  font-size: 0.7rem;
+  color: #888;
+  text-align: center;
+  min-width: 52px;
+  line-height: 1.3;
+}
+.percentile-bar {
+  flex: 1;
+  height: 20px;
+  border-radius: 10px;
+  display: flex;
+  overflow: visible;
+  position: relative;
+  background: #eee;
+}
+.pct-zone {
+  flex: 1;
+  height: 100%;
+}
+.zone-low {
+  background: rgba(255, 107, 107, 0.35);
+  border-radius: 10px 0 0 10px;
+}
+.zone-mid {
+  background: rgba(247, 183, 49, 0.35);
+}
+.zone-high {
+  background: rgba(29, 209, 161, 0.35);
+  border-radius: 0 10px 10px 0;
+}
+
+.pct-marker {
+  position: absolute;
+  top: -4px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+.marker-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 4px;
+}
+.marker-current {
+  background: #764ba2;
+}
+.marker-next {
+  background: #f7b731;
+}
+.marker-tip {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #555;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.percentile-legend {
+  font-size: 0.7rem;
+  color: #bbb;
+  margin: 0;
+  text-align: center;
+}

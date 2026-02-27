@@ -1,0 +1,65 @@
+<div class="score-wrapper">
+  <!-- Badge principal -->
+  <div class="score-badge" [class]="'score-' + score">
+    <span class="score-icon">{{ icon }}</span>
+    <div class="score-text-block">
+      <span class="score-main">Performance {{ score }}</span>
+      <span class="score-sub">Mois actuel & prochain vs historique</span>
+    </div>
+  </div>
+
+  <!-- Détails comparaison -->
+  <div class="score-context">
+    @if (details) {
+      <div class="context-row">
+        <span class="ctx-label">📅 {{ details.current_month_label }}</span>
+        <span
+          class="ctx-value"
+          [class]="getPredClass(details.pred_current_month)"
+        >
+          {{ details.pred_current_month }} Ar
+        </span>
+      </div>
+      <div class="context-row">
+        <span class="ctx-label">📅 {{ details.next_month_label }}</span>
+        <span class="ctx-value" [class]="getPredClass(details.pred_next_month)">
+          {{ details.pred_next_month }} Ar
+        </span>
+      </div>
+      <div class="percentile-bar-wrap">
+        <span class="pct-label pct-low"
+          >Faible<br />{{ details.historical_p33 }}</span
+        >
+        <div class="percentile-bar">
+          <div class="pct-zone zone-low"></div>
+          <div class="pct-zone zone-mid"></div>
+          <div class="pct-zone zone-high"></div>
+          <!-- Marker mois actuel -->
+          <div
+            class="pct-marker"
+            [style.left.%]="getMarkerPos(details.pred_current_month)"
+            title="Mois actuel"
+          >
+            <div class="marker-dot marker-current"></div>
+            <span class="marker-tip">M</span>
+          </div>
+          <!-- Marker mois prochain -->
+          <div
+            class="pct-marker"
+            [style.left.%]="getMarkerPos(details.pred_next_month)"
+            title="Mois prochain"
+          >
+            <div class="marker-dot marker-next"></div>
+            <span class="marker-tip">M+1</span>
+          </div>
+        </div>
+        <span class="pct-label pct-high"
+          >Élevé<br />{{ details.historical_p66 }}</span
+        >
+      </div>
+      <p class="percentile-legend">
+        Basé sur les percentiles P33 / P66 de l'historique
+      </p>
+    }
+  </div>
+</div>
