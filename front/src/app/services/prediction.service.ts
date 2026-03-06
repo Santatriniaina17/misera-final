@@ -7,7 +7,7 @@ import { PredictionResult, SellerType } from '../models/prediction.model';
   providedIn: 'root',
 })
 export class PredictionService {
-  private apiUrl = 'http://localhost:8000/api/predict/';
+  private apiUrl = 'https://misera-final.onrender.com/api/predict/';
   constructor(private http: HttpClient) {}
   predict(file: File, type: SellerType): Observable<PredictionResult> {
     const form = new FormData();
