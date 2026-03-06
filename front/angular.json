@@ -25,7 +25,8 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/assets"],
             "styles": ["src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "defaultConfiguration": "production"
           },
           "configurations": {
             "production": {
@@ -48,8 +49,7 @@
               "extractLicenses": false,
               "sourceMap": true
             }
-          },
-          "defaultConfiguration": "production"
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",

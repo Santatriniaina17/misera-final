@@ -1,5 +1,5 @@
 {
   "buildCommand": "ng build --configuration production",
-  "outputDirectory": "dist/profit-predictor/browser",
+  "outputDirectory": "dist/misera/browser",
   "framework": "angular"
 }
