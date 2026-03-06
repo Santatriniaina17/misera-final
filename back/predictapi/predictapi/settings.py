@@ -1,6 +1,10 @@
 from pathlib import Path
+import os
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'static/'
 
 SECRET_KEY = 'django-insecure-c#33n^$thky5hk4n*o1f2yx=78fr7c^a4$55r)8*hqj5=1z-*t'
 
