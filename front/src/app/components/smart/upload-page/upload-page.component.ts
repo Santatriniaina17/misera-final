@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +12,7 @@ import { ResultsComponent } from '../../ui/results/results.component';
 import { PredictionResult, SellerType } from '../../../models/prediction.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PredictionService } from '../../../services/prediction.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload-page',
@@ -36,6 +37,7 @@ export class UploadPageComponent {
   isLoading = signal(false);
   isDragging = signal(false);
   result = signal<PredictionResult | null>(null);
+  route = inject(Router);
 
   constructor(
     private predictionService: PredictionService,
@@ -91,5 +93,9 @@ export class UploadPageComponent {
   reset() {
     this.result.set(null);
     this.selectedFile.set(null);
+  }
+
+  gotToHome() {
+    this.route.navigate(['/landing']);
   }
 }

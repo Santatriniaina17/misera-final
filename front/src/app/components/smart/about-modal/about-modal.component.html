@@ -1,32 +1,120 @@
-<div class="dialog-container">
-  <h2>Mode opératoire — Import CSV</h2>
+<div class="modal-backdrop" (click)="close()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <!-- Glow orbs décoratifs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
-  <p>
-    Pour effectuer un essai, importez un fichier CSV contenant les données
-    nécessaires à l’analyse.
-  </p>
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="header-icon">📋</div>
+      <div class="header-text">
+        <h2>Mode opératoire</h2>
+        <span class="subtitle">Guide d'import CSV</span>
+      </div>
+      <button class="close-btn" (click)="close()">✕</button>
+    </div>
 
-  <h3>🛒 Vente de produits</h3>
-  <ul>
-    <li><b>date</b></li>
-    <li><b>designation</b></li>
-    <li><b>prix_achat</b></li>
-    <li><b>prix_vente</b></li>
-  </ul>
+    <!-- Intro -->
+    <p class="intro-text">
+      Importez un fichier <span class="highlight">CSV</span> contenant vos
+      données. Plus l'historique est long, plus les prédictions sont précises.
+    </p>
 
-  <h3>💼 Vente de services</h3>
-  <ul>
-    <li><b>date</b></li>
-    <li><b>depense</b></li>
-    <li><b>revenu</b></li>
-  </ul>
+    <!-- Sections -->
+    <div class="sections-grid">
+      <!-- Vente produits -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-emoji">🛒</span>
+          <span class="section-title">Vente de produits</span>
+        </div>
+        <div class="columns-list">
+          <div class="col-item">
+            <span class="col-dot dot-blue"></span>
+            <code>date</code>
+            <span class="col-hint">ex: 2024-01-15</span>
+          </div>
+          <div class="col-item">
+            <span class="col-dot dot-blue"></span>
+            <code>designation</code>
+            <span class="col-hint">nom du produit</span>
+          </div>
+          <div class="col-item">
+            <span class="col-dot dot-red"></span>
+            <code>prix_achat</code>
+            <span class="col-hint">coût d'achat</span>
+          </div>
+          <div class="col-item">
+            <span class="col-dot dot-green"></span>
+            <code>prix_vente</code>
+            <span class="col-hint">prix de vente</span>
+          </div>
+        </div>
+        <div class="csv-preview">
+          <pre>
+date,designation,prix_achat,prix_vente
+2024-01-05,Riz 5kg,8000,12000
+2024-01-10,Huile 1L,4500,7000</pre
+          >
+        </div>
+      </div>
 
-  <p class="info">
-    Plus vos données sont historiques et bien datées, plus les résultats seront
-    précis et fiables.
-  </p>
+      <!-- Vente services -->
+      <div class="section-card">
+        <div class="section-header">
+          <span class="section-emoji">💼</span>
+          <span class="section-title">Vente de services</span>
+        </div>
+        <div class="columns-list">
+          <div class="col-item">
+            <span class="col-dot dot-blue"></span>
+            <code>date</code>
+            <span class="col-hint">ex: 2024-01-15</span>
+          </div>
+          <div class="col-item">
+            <span class="col-dot dot-red"></span>
+            <code>depense</code>
+            <span class="col-hint">charges du mois</span>
+          </div>
+          <div class="col-item">
+            <span class="col-dot dot-green"></span>
+            <code>revenu</code>
+            <span class="col-hint">recettes du mois</span>
+          </div>
+        </div>
+        <div class="csv-preview">
+          <pre>
+date,depense,revenu
+2024-01-15,150000,420000
+2024-02-15,180000,510000</pre
+          >
+        </div>
+      </div>
+    </div>
 
-  <div class="actions">
-    <button (click)="close()">Fermer</button>
+    <!-- Info tip -->
+    <div class="info-banner">
+      <span class="info-icon">💡</span>
+      <span
+        >Minimum <strong>12 mois</strong> de données recommandé pour des
+        prédictions fiables</span
+      >
+    </div>
+    <div>
+      <h3>
+        Cliquez
+        <a
+          href="https://drive.google.com/drive/folders/1-8GfYZCqrozv_7WpgaXklo7qbmAM7yLK?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          >ici</a
+        >
+        si vous n'avez pas de données CSV
+      </h3>
+    </div>
+    <!-- Action -->
+    <div class="modal-footer">
+      <button class="btn-close" (click)="close()">J'ai compris</button>
+    </div>
   </div>
 </div>

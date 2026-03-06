@@ -6,11 +6,11 @@
  -->
 <div class="upload-wrapper">
   <!-- Header -->
-  <div class="app-header">
+  <div class="app-header" (click)="gotToHome()">
     <div class="header-content">
       <h1 class="app-title">
         <span class="title-icon">📊</span>
-        ProfitPredictor AI
+        Mi-sera
       </h1>
       <p class="app-subtitle">
         Prédisez vos bénéfices futurs grâce au Machine Learning
@@ -115,11 +115,9 @@
             [disabled]="!canSubmit() || isLoading()"
             (click)="submit()"
           >
-            <mat-spinner *ngIf="isLoading()" diameter="20"></mat-spinner>
+            <mat-spinner *ngIf="isLoading()" diameter="15"></mat-spinner>
             <mat-icon *ngIf="!isLoading()">auto_awesome</mat-icon>
-            {{
-              isLoading() ? "Analyse en cours..." : "Lancer la prédiction IA"
-            }}
+            {{ isLoading() ? "Analyse en cours..." : "Lancer la prédiction" }}
           </button>
         </div>
       </mat-card-content>
