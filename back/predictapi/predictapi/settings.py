@@ -10,7 +10,10 @@ SECRET_KEY = 'django-insecure-c#33n^$thky5hk4n*o1f2yx=78fr7c^a4$55r)8*hqj5=1z-*t
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://misera-depl.vercel.app", "http://localhost:4200", "misera-final.onrender.com" ]
+# CORS — autorise toutes les origines (Angular sur localhost:4200)
+CORS_ALLOW_ALL_ORIGINS = ["https://misera-depl.vercel.app", "http://localhost:4200", "misera-final.onrender.com" ]
+
+ALLOWED_HOSTS = ["misera-depl.vercel.app", "localhost:4200", "misera-final.onrender.com" ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -75,8 +78,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# CORS — autorise toutes les origines (Angular sur localhost:4200)
-CORS_ALLOW_ALL_ORIGINS = True
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024   # 10MB
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024   # 10MB
