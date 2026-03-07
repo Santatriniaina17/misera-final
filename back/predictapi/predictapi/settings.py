@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-c#33n^$thky5hk4n*o1f2yx=78fr7c^a4$55r)8*hqj5=1z-*t
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://misera-depl.vercel.app", "http://localhost:4200" ]
+ALLOWED_HOSTS = ["https://misera-depl.vercel.app", "http://localhost:4200", "misera-final.onrender.com" ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
