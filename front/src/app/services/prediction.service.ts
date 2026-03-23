@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { PredictionResult, SellerType } from '../models/prediction.model';
 
 @Injectable({
@@ -15,5 +15,14 @@ export class PredictionService {
     form.append('file', file);
     form.append('type', type);
     return this.http.post<PredictionResult>(this.apiUrl, form);
+  }
+  ping(): Observable<any> {
+    // On fait un GET vers le même endpoint ou une route publique
+    return this.http.get(this.apiUrl).pipe(
+      catchError((err) => {
+        console.warn('Backend non réveillé', err);
+        return of(null); // ne plante pas l'app si erreur
+      }),
+    );
   }
 }
