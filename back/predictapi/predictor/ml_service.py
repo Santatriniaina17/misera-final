@@ -63,8 +63,8 @@ def _build_models_config():
 MODELS_CONFIG = _build_models_config()
 
 
-def train_best_model(X, y):
-    """Train multiple models with GridSearch and return the best one."""
+""" def train_best_model(X, y):
+    #Train multiple models with GridSearch and return the best one.
     tscv = TimeSeriesSplit(n_splits=min(3, len(X) - 1))
     best_model = None
     best_score = -np.inf
@@ -94,8 +94,73 @@ def train_best_model(X, y):
         except Exception:
             model_scores[name] = None
 
-    return best_model, best_name, best_score, model_scores
+    return best_model, best_name, best_score, model_scores """
+def train_best_model(X, y):
+    """
+    Version optimisée :
+    - Pas de GridSearch (trop lent)
+    - Validation simple avec TimeSeriesSplit
+    - Compatible production (Render)
+    """
 
+    # Sécurité si dataset trop petit
+    if len(X) < 5:
+        pipe = Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', Ridge(alpha=1.0))
+        ])
+        pipe.fit(X, y)
+        return pipe, "ridge", 0, {"ridge": 0}
+
+    tscv = TimeSeriesSplit(n_splits=2)
+
+    best_model = None
+    best_score = -np.inf
+    best_name = ''
+    model_scores = {}
+
+    for name, config in MODELS_CONFIG.items():
+        try:
+            pipe = Pipeline([
+                ('scaler', StandardScaler()),
+                ('model', config['model'])
+            ])
+
+            scores = []
+
+            for train_idx, test_idx in tscv.split(X):
+                X_train, X_test = X[train_idx], X[test_idx]
+                y_train, y_test = y[train_idx], y[test_idx]
+
+                pipe.fit(X_train, y_train)
+                score = pipe.score(X_test, y_test)
+                scores.append(score)
+
+            avg_score = float(np.mean(scores))
+            model_scores[name] = round(avg_score, 4)
+
+            if avg_score > best_score:
+                best_score = avg_score
+                best_model = pipe
+                best_name = name
+
+        except Exception:
+            model_scores[name] = None
+
+    # Fit final sur toutes les données
+    if best_model is not None:
+        best_model.fit(X, y)
+    else:
+        # fallback sécurité
+        best_model = Pipeline([
+            ('scaler', StandardScaler()),
+            ('model', Ridge(alpha=1.0))
+        ])
+        best_model.fit(X, y)
+        best_name = "ridge"
+        best_score = 0
+
+    return best_model, best_name, best_score, model_scores
 
 def compute_score_label(pred_current_month: float, pred_next_month: float, historical_benefits: np.ndarray):
     """
